@@ -1,0 +1,26 @@
+{
+  "name": "ninjakatt-plugin-files",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joachim Lindström",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lindstrm/ninjakatt-plugin-files.git"
+  },
+  "homepage": "https://github.com/lindstrm/ninjakatt-plugin-files",
+  "bugs": {
+    "url": "https://github.com/lindstrm/ninjakatt-plugin-files/issues"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chokidar": "^2.0.4",
+    "fs-extra": "^6.0.1",
+    "ninjakatt-plugin-base": "^1.0.1"
+  }
+}
