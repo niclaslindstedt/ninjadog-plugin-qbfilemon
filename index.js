@@ -34,9 +34,13 @@ module.exports = class Files extends Base {
     const file = await axios
       .get(url, httpconfig)
       .then(response => response.data);
-    savePath = path.resolve(savePath, filename(url));
+
+    if (!savePath.match('.')) {
+      savePath = path.resolve(savePath, filename(url));
+    }
+
     await fs.writeFile(savePath, file);
-    global.emitter.emit('message', `Downloaded ${savePath}`, 'add');
+    global.emitter.emit('message', `Downloaded ${savePath}`, 'add', Files.name);
 
     if (callback) {
       return callback(savePath);
@@ -65,10 +69,11 @@ module.exports = class Files extends Base {
           e => {
             emitter.emit(
               'message',
-              `Error downloading ${url.split('/').pop()}, status: ${
-                e.response.status
-              }`,
-              'error'
+              `Error downloading ${savePath
+                .split(path.sep)
+                .pop()}, status: ${e}`,
+              'error',
+              Files.name
             );
           }
         );
