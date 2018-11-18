@@ -1,4 +1,3 @@
-const Base = require('ninjakatt-plugin-base');
 const chokidar = require('chokidar');
 const axios = require('axios');
 const fs = require('fs-extra');
@@ -10,14 +9,13 @@ const config = {
 };
 const emitter = global.emitter;
 
-module.exports = class Files extends Base {
+module.exports = class Files {
   constructor() {
-    super(__dirname);
-    this.setupListeners();
-    this.http = null;
+    this.construct(__dirname);
   }
 
   setup() {
+    this.setupListeners();
     const watcher = chokidar.watch(this.settings.watchDir);
     watcher
       .on('add', path => {
