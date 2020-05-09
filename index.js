@@ -17,34 +17,24 @@ module.exports = class Files {
   setup() {
     this.logDebug('Setting up files plugin');
     this.setupFileWatcher();
+  }
+
+  subscriptions() {
     this.subscribe('file.save', this.actOnFileSave);
     this.subscribe('file.download', this.actOnFileDownload);
   }
 
-  setupFileWatcher() {
-    const watcher = chokidar.watch(this.settings.watchDir);
-    watcher
-      .on('add', (path) => {
-        this.logDiag(`File added: ${path}`);
-        this.emit('file.add', path);
-      })
-      .on('change', (path) => {
-        this.logDiag(`File changed: ${path}`);
-        this.emit('file.change', path);
-      })
-      .on('error', (error) => {
-        this.logError(`Error from chokidar watch: ${error}`);
-      });
-  }
+  /********* Event Functions *********/
 
-  async actOnFileSave(path, data) {
+  actOnFileSave = async (path, data) => {
     this.logDiag(`Acting on saved file: ${path}`);
     await fs.ensureFile(path);
     await fs.writeFile(path, data);
     return Promise.resolve(path);
-  }
+  };
 
-  async actOnFileDownload(url, savePath, httpconfig, callback) {
+  actOnFileDownload = async (url, savePath, httpconfig, callback) => {
+    this.logDiag(`Acting on downloaded file: ${path}`);
     callback = typeof httpconfig === 'function' ? httpconfig : callback;
     httpconfig = typeof httpconfig === 'function' ? null : httpconfig;
     savePath = await this.downloadFile(url, savePath, httpconfig).catch((e) => {
@@ -56,6 +46,28 @@ module.exports = class Files {
     } else {
       return Promise.resolve(path);
     }
+  };
+
+  /********* Plugin Functions *********/
+
+  setupFileWatcher() {
+    const watcher = chokidar.watch(this.settings.watchDir);
+    watcher
+      .on('add', (path) => {
+        setTimeout(() => {
+          this.logDiag(`File added: ${path}`);
+          this.emit('file.add', path);
+        }, 2000);
+      })
+      .on('change', (path) => {
+        setTimeout(() => {
+          this.logDiag(`File changed: ${path}`);
+          this.emit('file.change', path);
+        }, 2000);
+      })
+      .on('error', (error) => {
+        this.logError(`Error from chokidar watch: ${error}`);
+      });
   }
 
   async downloadFile(url, savePath, httpconfig, callback) {
