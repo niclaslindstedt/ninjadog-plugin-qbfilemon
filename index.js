@@ -17,8 +17,8 @@ module.exports = class Files {
   setup() {
     this.logDebug('Setting up files plugin');
     this.setupFileWatcher();
-    this.subscribe('file.save', actOnFileSave);
-    this.subscribe('file.download', actOnFileDownload);
+    this.subscribe('file.save', this.actOnFileSave);
+    this.subscribe('file.download', this.actOnFileDownload);
   }
 
   setupFileWatcher() {
@@ -48,9 +48,8 @@ module.exports = class Files {
     callback = typeof httpconfig === 'function' ? httpconfig : callback;
     httpconfig = typeof httpconfig === 'function' ? null : httpconfig;
     savePath = await this.downloadFile(url, savePath, httpconfig).catch((e) => {
-      this.logError(
-        `Error downloading ${savePath.split(path.sep).pop()}, status: ${e}`
-      );
+      const file = savePath.split(path.sep).pop();
+      this.logError(`Error downloading ${file}, status: ${e}`);
     });
     if (callback) {
       return callback(path);
