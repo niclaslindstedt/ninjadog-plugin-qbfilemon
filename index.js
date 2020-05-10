@@ -71,22 +71,26 @@ module.exports = class Files {
   }
 
   async downloadFile(url, savePath, httpconfig, callback) {
-    httpconfig = { ...config, ...httpconfig };
-    const file = await axios
-      .get(url, httpconfig)
-      .then((response) => response.data);
+    try {
+      httpconfig = { ...config, ...httpconfig };
+      const file = await axios
+        .get(url, httpconfig)
+        .then((response) => response.data);
 
-    if (!savePath.match('.')) {
-      savePath = path.resolve(savePath, filename(url));
+      if (!savePath.match('.')) {
+        savePath = path.resolve(savePath, filename(url));
+      }
+
+      await fs.writeFile(savePath, file);
+      this.logInfo(`Downloaded ${savePath}`);
+
+      if (callback) {
+        return callback(savePath);
+      }
+
+      return Promise.resolve(savePath);
+    } catch (e) {
+      this.logError(`Error while downloading file: ${url}`)
     }
-
-    await fs.writeFile(savePath, file);
-    this.logInfo(`Downloaded ${savePath}`);
-
-    if (callback) {
-      return callback(savePath);
-    }
-
-    return Promise.resolve(savePath);
   }
 };
