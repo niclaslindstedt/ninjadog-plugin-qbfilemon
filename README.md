@@ -1,1 +1,1 @@
-ninjakatt-plugin-files
+ninjadog-plugin-files

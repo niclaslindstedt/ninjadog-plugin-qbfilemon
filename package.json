@@ -1,20 +1,20 @@
 {
-  "name": "ninjakatt-plugin-files",
-  "version": "1.0.8",
-  "description": "",
+  "name": "ninjadog-plugin-qbfilemon",
+  "version": "1.0.0",
+  "description": "File-monitoring companion plugin for Ninjadog plugin \"QB\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\""
   },
   "keywords": [],
-  "author": "Joachim Lindström",
+  "author": "Niclas Lindstedt <nicl@slindstedt.se>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lindstrm/ninjakatt-plugin-files.git"
+    "url": "https://github.com/niclaslindstedt/ninjadog-plugin-qbfilemon.git"
   },
-  "homepage": "https://github.com/lindstrm/ninjakatt-plugin-files",
+  "homepage": "https://github.com/niclaslindstedt/ninjadog-plugin-qbfilemon",
   "bugs": {
-    "url": "https://github.com/lindstrm/ninjakatt-plugin-files/issues"
+    "url": "https://github.com/niclaslindstedt/ninjadog-plugin-qbfilemon/issues"
   },
   "license": "ISC",
   "dependencies": {
