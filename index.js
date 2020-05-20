@@ -7,7 +7,6 @@ const { filename } = require(`${global.appRoot}/lib/helpers`);
 const config = {
   responseType: 'arraybuffer',
 };
-const emitter = global.emitter;
 
 module.exports = class Files {
   constructor() {
@@ -90,7 +89,7 @@ module.exports = class Files {
 
       return Promise.resolve(savePath);
     } catch (e) {
-      this.logError(`Error while downloading file: ${url}`)
+      this.logError(`Error while downloading file: ${url}`);
     }
   }
 };
