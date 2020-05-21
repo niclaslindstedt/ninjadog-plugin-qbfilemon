@@ -15,7 +15,6 @@ module.exports = class Files {
   }
 
   setup() {
-    this.logDebug('Setting up files plugin');
     this.setupFileWatcher();
   }
 
@@ -24,7 +23,7 @@ module.exports = class Files {
     this.subscribe('file.download', this.actOnFileDownload);
   }
 
-  /** ******* Event Functions *********/
+  /** Event Functions **/
 
   actOnFileSave = async (path, data) => {
     this.logDiag(`Acting on saved file: ${path}`);
@@ -48,7 +47,7 @@ module.exports = class Files {
     }
   };
 
-  /** ******* Plugin Functions *********/
+  /** Plugin Functions **/
 
   setupFileWatcher() {
     const watcher = chokidar.watch(this.settings.watchDir);
