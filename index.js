@@ -8,7 +8,7 @@ const config = {
   responseType: 'arraybuffer',
 };
 
-module.exports = class Files {
+module.exports = class QbFilemon {
 
   constructor() {
     this.construct(__dirname);
