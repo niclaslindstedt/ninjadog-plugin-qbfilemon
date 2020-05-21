@@ -9,6 +9,7 @@ const config = {
 };
 
 module.exports = class Files {
+
   constructor() {
     this.construct(__dirname);
   }
@@ -23,7 +24,7 @@ module.exports = class Files {
     this.subscribe('file.download', this.actOnFileDownload);
   }
 
-  /********* Event Functions *********/
+  /** ******* Event Functions *********/
 
   actOnFileSave = async (path, data) => {
     this.logDiag(`Acting on saved file: ${path}`);
@@ -47,7 +48,7 @@ module.exports = class Files {
     }
   };
 
-  /********* Plugin Functions *********/
+  /** ******* Plugin Functions *********/
 
   setupFileWatcher() {
     const watcher = chokidar.watch(this.settings.watchDir);
@@ -92,4 +93,5 @@ module.exports = class Files {
       this.logError(`Error while downloading file: ${url}`);
     }
   }
+
 };
